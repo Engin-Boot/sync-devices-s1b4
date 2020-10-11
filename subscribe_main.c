@@ -62,10 +62,10 @@ void IsTopicNameGiven(int argc, char** argv, MQTTClient_nameValue* infos, const 
 }
 
 //change 4
-void wildCardCheckInTopicName()
+int wildCardCheckInTopicName()
 {
 	if (strchr(opts.topic, '#') || strchr(opts.topic, '+'))
-		opts.verbose = 1;
+		return 1;
 }
 
 //Change 5
@@ -106,6 +106,72 @@ int setVerionEqualToFiveIfGreater()
 		return MQTTVERSION_5;
 }
 
+//change 9
+void printMQTTClientErrorMessage(int rc)
+{
+	if (rc != MQTTCLIENT_SUCCESS)
+	{
+		if (!opts.quiet)
+			fprintf(stderr, "Failed to create client, return code: %s\n", MQTTClient_strerror(rc));
+		exit(EXIT_FAILURE);
+	}
+}
+
+
+//change 10
+void interruptAndTerminate() 
+{
+#if defined(_WIN32)
+	signal(SIGINT, cfinish);
+	signal(SIGTERM, cfinish);
+#else
+	memset(&sa, 0, sizeof(struct sigaction));
+	sa.sa_handler = cfinish;
+	sa.sa_flags = 0;
+
+	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGTERM, &sa, NULL);
+#endif
+}
+
+//change 11
+//void ExitIfCheckConnectionIsNotSuccess(MQTTClient client)
+//{
+//	if (myconnect(client, &opts) != MQTTCLIENT_SUCCESS)
+//		goto exit;
+//}
+
+
+//change 12
+int ChangeResponseAndReasonCodeIfMqttVersionGreaterThanFive(int rc, MQTTClient client)
+{
+	if (opts.MQTTVersion >= MQTTVERSION_5)
+	{
+		MQTTResponse response = MQTTClient_subscribe5(client, opts.topic, opts.qos, NULL, NULL);
+		rc = response.reasonCode;
+		MQTTResponse_free(response);
+	}
+	else
+		rc = MQTTClient_subscribe(client, opts.topic, opts.qos);
+}
+
+//change 13
+//void PrintAndExitIfRcNotEqualToClientSuccessAndQos(int rc)
+//{
+//	if (rc != MQTTCLIENT_SUCCESS && rc != opts.qos)
+//	{
+//		if (!opts.quiet)
+//			fprintf(stderr, "Error %d subscribing to topic %s\n", rc, opts.topic);
+//		goto exit;
+//	}
+//}
+
+
+//**********************MAIN BEGINS*************************//
+//**********************MAIN BEGINS*************************//
+//**********************MAIN BEGINS*************************//
+//**********************MAIN BEGINS*************************//
+//**********************MAIN BEGINS*************************//
 int  SUBSCRIBEmain(int argc, char** argv)
 {
 	MQTTClient client;
@@ -125,12 +191,12 @@ int  SUBSCRIBEmain(int argc, char** argv)
 	
 
 	//IsTopicNameGiven
-	void IsTopicNameGiven( argc,  argv, infos, program_name);			//change3
-
+	//void IsTopicNameGiven( argc,  argv, infos, program_name);			//change3
+	if (getopts(argc, argv, &opts) != 0)
+		usage(&opts, (pubsub_opts_nameValue*)infos, program_name);
 	
 	//wildCardCheckInTopicName
-	void wildCardCheckInTopicName();									//change 4
-
+	opts.verbose = wildCardCheckInTopicName();							//change 4
 
 	//CheckconnectionToWhichHost
 	url = CheckconnectionToWhichHost();									//change 5
@@ -138,36 +204,32 @@ int  SUBSCRIBEmain(int argc, char** argv)
 	//printUrlIfVerboseIsTrue
 	void printUrlIfVerboseIsTrue(url);									//change 6
 	
+
 	//settingTraceCallBackAndLevel
 	void settingTraceCallBackAndLevel();								//change 7
 	
 	//setVerionEqualToFiveIfGreater
-	createOpts.MQTTVersion= setVerionEqualToFiveIfGreater();								//change 8
+	createOpts.MQTTVersion= setVerionEqualToFiveIfGreater();			//change 8
 	
+
 	rc = MQTTClient_createWithOptions(&client, url, opts.clientid, MQTTCLIENT_PERSISTENCE_NONE,
 		NULL, &createOpts);
-	if (rc != MQTTCLIENT_SUCCESS)
-	{
-		if (!opts.quiet)
-			fprintf(stderr, "Failed to create client, return code: %s\n", MQTTClient_strerror(rc));
-		exit(EXIT_FAILURE);
-	}
+	
+	//printMQTTClientErrorMessage
+	void printMQTTClientErrorMessage(int rc);							//change 9
 
-#if defined(_WIN32)
-	signal(SIGINT, cfinish);
-	signal(SIGTERM, cfinish);
-#else
-	memset(&sa, 0, sizeof(struct sigaction));
-	sa.sa_handler = cfinish;
-	sa.sa_flags = 0;
+	
+	//interruptAndTerminate
+	void interruptAndTerminate();										//change 10
 
-	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGTERM, &sa, NULL);
-#endif
-
-	if (myconnect(client,&opts) != MQTTCLIENT_SUCCESS)
+	//ExitIfCheckConnectionIsNotSuccess									
+	//void ExitIfCheckConnectionIsNotSuccess(client);						//change 11
+	if (myconnect(client, &opts) != MQTTCLIENT_SUCCESS)
 		goto exit;
 
+
+	//ChangeResponseAndReasonCodeIfMqttVersionGreaterThanFive
+	//rc = ChangeResponseAndReasonCodeIfMqttVersionGreaterThanFive(rc,client);	//change 12
 	if (opts.MQTTVersion >= MQTTVERSION_5)
 	{
 		MQTTResponse response = MQTTClient_subscribe5(client, opts.topic, opts.qos, NULL, NULL);
@@ -176,6 +238,10 @@ int  SUBSCRIBEmain(int argc, char** argv)
 	}
 	else
 		rc = MQTTClient_subscribe(client, opts.topic, opts.qos);
+
+
+	//PrintAndExitIfRcNotEqualToClientSuccessAndQos
+	//void PrintAndExitIfRcNotEqualToClientSuccessAndQos(rc);						//change 13
 	if (rc != MQTTCLIENT_SUCCESS && rc != opts.qos)
 	{
 		if (!opts.quiet)
