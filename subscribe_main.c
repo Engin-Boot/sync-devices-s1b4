@@ -73,7 +73,7 @@ char* CheckconnectionToWhichHost()
 {
 	char* url;
 	if (opts.connection)
-		 url = opts.connection;
+		url = opts.connection;
 	else
 	{
 		url = malloc(100);
@@ -84,7 +84,7 @@ char* CheckconnectionToWhichHost()
 
 //change 6
 void printUrlIfVerboseIsTrue(char* url)
-{	
+{
 	if (opts.verbose)
 		printf("URL is %s\n", url);
 }
@@ -119,7 +119,7 @@ void printMQTTClientErrorMessage(int rc)
 
 
 //change 10
-void interruptAndTerminate() 
+void interruptAndTerminate()
 {
 #if defined(_WIN32)
 	signal(SIGINT, cfinish);
@@ -181,24 +181,23 @@ size_t SetDelimiterLength()
 }
 
 //change 16
-void printPayloadlenAndPayload(MQTTClient_message* message,size_t delimlen)
+void printPayloadlenAndPayload(MQTTClient_message* message, size_t delimlen)
 {
 	if (opts.delimiter == NULL || (message->payloadlen > delimlen &&
 		strncmp(opts.delimiter, &((char*)message->payload)[message->payloadlen - delimlen], delimlen) == 0))
 		printf("%.*s", message->payloadlen, (char*)message->payload);
-	else
-		printf("%.*s%s", message->payloadlen, (char*)message->payload, opts.delimiter);
+	
 }
 
 //change 17
-void PassingMQttpropertiesToLogProperties(MQTTClient_message* message)									
+void PassingMQttpropertiesToLogProperties(MQTTClient_message* message)
 {
 	if (message->struct_version == 1 && opts.verbose)
 		logProperties(&message->properties);
 }
 
 //change 18
-void connectClientToServer(rc,  client)
+void connectClientToServer(rc, client)
 {
 	if (rc != 0)
 		myconnect(&client, &opts);
@@ -223,13 +222,13 @@ int  SUBSCRIBEmain(int argc, char** argv)
 	MQTTClient_nameValue* infos = MQTTClient_getVersionInfo();
 
 	//argCountLessThanTwo
-	void argCountLessThanTwo(argc,infos,program_name);					//change 2
-	
+	void argCountLessThanTwo(argc, infos, program_name);					//change 2
+
 	//IsTopicNameGiven
 	//void IsTopicNameGiven( argc,  argv, infos, program_name);			//change3
 	if (getopts(argc, argv, &opts) != 0)
 		usage(&opts, (pubsub_opts_nameValue*)infos, program_name);
-	
+
 	//wildCardCheckInTopicName
 	opts.verbose = wildCardCheckInTopicName();							//change 4
 
@@ -238,16 +237,16 @@ int  SUBSCRIBEmain(int argc, char** argv)
 
 	//printUrlIfVerboseIsTrue
 	void printUrlIfVerboseIsTrue(url);									//change 6
-	
+
 	//settingTraceCallBackAndLevel
 	void settingTraceCallBackAndLevel();								//change 7
-	
+
 	//setVerionEqualToFiveIfGreater
-	createOpts.MQTTVersion= setVerionEqualToFiveIfGreater();			//change 8
-	
+	createOpts.MQTTVersion = setVerionEqualToFiveIfGreater();			//change 8
+
 	rc = MQTTClient_createWithOptions(&client, url, opts.clientid, MQTTCLIENT_PERSISTENCE_NONE,
 		NULL, &createOpts);
-	
+
 	//printMQTTClientErrorMessage
 	void printMQTTClientErrorMessage(int rc);							//change 9
 
@@ -267,8 +266,8 @@ int  SUBSCRIBEmain(int argc, char** argv)
 		rc = response.reasonCode;
 		MQTTResponse_free(response);
 	}
-	else
-		rc = MQTTClient_subscribe(client, opts.topic, opts.qos);
+	
+	rc = MQTTClient_subscribe(client, opts.topic, opts.qos);
 
 
 	//PrintAndExitIfRcNotEqualToClientSuccessAndQos
@@ -279,7 +278,8 @@ int  SUBSCRIBEmain(int argc, char** argv)
 			fprintf(stderr, "Error %d subscribing to topic %s\n", rc, opts.topic);
 		goto exit;
 	}
-
+	
+	
 	while (!toStop)
 	{
 		char* topicName = NULL;
@@ -287,37 +287,33 @@ int  SUBSCRIBEmain(int argc, char** argv)
 		MQTTClient_message* message = NULL;
 
 		rc = MQTTClient_receive(client, &topicName, &topicLen, &message, 1000);
+
 		if (message)
 		{
 			size_t delimlen = 0;
 
 			//PrintTopicNameIfVerboseIsTrue
 			void PrintTopicNameIfVerboseIsTrue(topicName);									//change 14
-			
+
 			//SetDelimiterLength
 			delimlen = SetDelimiterLength();												//change 15
-			
+
 			//printPayloadlenAndPayload		
-			void printPayloadlenAndPayload(message,delimlen);								//change 16
-			if (opts.delimiter == NULL || (message->payloadlen > delimlen &&
-				strncmp(opts.delimiter, &((char*)message->payload)[message->payloadlen - delimlen], delimlen) == 0))
-				printf("%.*s", message->payloadlen, (char*)message->payload);
-			else
-				printf("%.*s%s", message->payloadlen, (char*)message->payload, opts.delimiter);
-			
+			void printPayloadlenAndPayload(message, delimlen);								//change 16
+						
+			printf("%.*s%s", message->payloadlen, (char*)message->payload, opts.delimiter);
+
 			//PassingMQttpropertiesToLogProperties
 			void PassingMQttpropertiesToLogProperties(message);											//change 17
 			/*if (message->struct_version == 1 && opts.verbose)
 				logProperties(&message->properties);*/
-			
+
 			fflush(stdout);
 			MQTTClient_freeMessage(&message);
 			MQTTClient_free(topicName);
 		}
 		//connectClientToServer
-		void connectClientToServer(rc,client);															//change 18
-		/*if (rc != 0)
-			myconnect(&client,&opts);*/
+		void connectClientToServer(rc, client);															//change 18
 	}
 exit:
 	MQTTClient_disconnect(client, 0);
