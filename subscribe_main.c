@@ -1,6 +1,7 @@
 #include "subscribe_main.h"
 
 volatile int toStop = 0;
+static jmp_buf buf;
 
 
 struct pubsub_opts opts =
@@ -139,15 +140,16 @@ int ChangeResponseAndReasonCodeIfMqttVersionGreaterThanFive(int rc, MQTTClient c
 }
 
 //change 13
-//void PrintAndExitIfRcNotEqualToClientSuccessAndQos(int rc)
-//{
-//	if (rc != MQTTCLIENT_SUCCESS && rc != opts.qos)
-//	{
-//		if (!opts.quiet)
-//			fprintf(stderr, "Error %d subscribing to topic %s\n", rc, opts.topic);
-//		goto exit;
-//	}
-//}
+bool PrintAndExitIfRcNotEqualToClientSuccessAndQos(int rc)
+{
+	if (rc != MQTTCLIENT_SUCCESS && rc != opts.qos)
+	{
+		if (!opts.quiet)
+			fprintf(stderr, "Error %d subscribing to topic %s\n", rc, opts.topic);
+		return true;
+	}
+	return false;
+}
 
 //change 14
 void PrintTopicNameIfVerboseIsTrue(char* topicName)
@@ -256,13 +258,11 @@ int  SUBSCRIBEmain(int argc, char** argv)
 
 
 	//PrintAndExitIfRcNotEqualToClientSuccessAndQos
-	//void PrintAndExitIfRcNotEqualToClientSuccessAndQos(rc);						//change 13
-	if (rc != MQTTCLIENT_SUCCESS && rc != opts.qos)
-	{
-		if (!opts.quiet)
-			fprintf(stderr, "Error %d subscribing to topic %s\n", rc, opts.topic);
+	bool check = 0;
+	check= PrintAndExitIfRcNotEqualToClientSuccessAndQos(rc);						//change 13
+	if (check)
 		goto exit;
-	}
+	
 	
 	while (!toStop)
 	{
