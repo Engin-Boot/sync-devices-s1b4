@@ -1,21 +1,4 @@
-#include "MQTTClient.h"
-#include "MQTTClientPersistence.h"
-#include "pubsub_opts.h"
-#include "ClientConnection.h"
-#include"TraceCallBacks.h"
-
-#include <stdio.h>
-#include <signal.h>
-#include <string.h>
-#include <stdlib.h>
-
-
-#if defined(_WIN32)
-#define sleep Sleep
-#else
-#include <sys/time.h>
-#endif
-
+#include "subscribe_main.h"
 
 volatile int toStop = 0;
 
@@ -202,6 +185,8 @@ void connectClientToServer(rc, client)
 	if (rc != 0)
 		myconnect(&client, &opts);
 }
+
+
 //**********************MAIN BEGINS*************************//
 //**********************MAIN BEGINS*************************//
 //**********************MAIN BEGINS*************************//
@@ -279,7 +264,6 @@ int  SUBSCRIBEmain(int argc, char** argv)
 		goto exit;
 	}
 	
-	
 	while (!toStop)
 	{
 		char* topicName = NULL;
@@ -305,13 +289,12 @@ int  SUBSCRIBEmain(int argc, char** argv)
 
 			//PassingMQttpropertiesToLogProperties
 			void PassingMQttpropertiesToLogProperties(message);											//change 17
-			/*if (message->struct_version == 1 && opts.verbose)
-				logProperties(&message->properties);*/
-
+			
 			fflush(stdout);
 			MQTTClient_freeMessage(&message);
 			MQTTClient_free(topicName);
 		}
+
 		//connectClientToServer
 		void connectClientToServer(rc, client);															//change 18
 	}
