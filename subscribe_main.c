@@ -166,7 +166,43 @@ int ChangeResponseAndReasonCodeIfMqttVersionGreaterThanFive(int rc, MQTTClient c
 //	}
 //}
 
+//change 14
+void PrintTopicNameIfVerboseIsTrue(char* topicName)
+{
+	if (opts.verbose)
+		printf("%s\t", topicName);
+}
 
+//change 15
+size_t SetDelimiterLength()
+{
+	if (opts.delimiter)
+		return strlen(opts.delimiter);
+}
+
+//change 16
+void printPayloadlenAndPayload(MQTTClient_message* message,size_t delimlen)
+{
+	if (opts.delimiter == NULL || (message->payloadlen > delimlen &&
+		strncmp(opts.delimiter, &((char*)message->payload)[message->payloadlen - delimlen], delimlen) == 0))
+		printf("%.*s", message->payloadlen, (char*)message->payload);
+	else
+		printf("%.*s%s", message->payloadlen, (char*)message->payload, opts.delimiter);
+}
+
+//change 17
+void PassingMQttpropertiesToLogProperties(MQTTClient_message* message)									
+{
+	if (message->struct_version == 1 && opts.verbose)
+		logProperties(&message->properties);
+}
+
+//change 18
+void connectClientToServer(rc,  client)
+{
+	if (rc != 0)
+		myconnect(&client, &opts);
+}
 //**********************MAIN BEGINS*************************//
 //**********************MAIN BEGINS*************************//
 //**********************MAIN BEGINS*************************//
@@ -189,7 +225,6 @@ int  SUBSCRIBEmain(int argc, char** argv)
 	//argCountLessThanTwo
 	void argCountLessThanTwo(argc,infos,program_name);					//change 2
 	
-
 	//IsTopicNameGiven
 	//void IsTopicNameGiven( argc,  argv, infos, program_name);			//change3
 	if (getopts(argc, argv, &opts) != 0)
@@ -204,21 +239,18 @@ int  SUBSCRIBEmain(int argc, char** argv)
 	//printUrlIfVerboseIsTrue
 	void printUrlIfVerboseIsTrue(url);									//change 6
 	
-
 	//settingTraceCallBackAndLevel
 	void settingTraceCallBackAndLevel();								//change 7
 	
 	//setVerionEqualToFiveIfGreater
 	createOpts.MQTTVersion= setVerionEqualToFiveIfGreater();			//change 8
 	
-
 	rc = MQTTClient_createWithOptions(&client, url, opts.clientid, MQTTCLIENT_PERSISTENCE_NONE,
 		NULL, &createOpts);
 	
 	//printMQTTClientErrorMessage
 	void printMQTTClientErrorMessage(int rc);							//change 9
 
-	
 	//interruptAndTerminate
 	void interruptAndTerminate();										//change 10
 
@@ -226,7 +258,6 @@ int  SUBSCRIBEmain(int argc, char** argv)
 	//void ExitIfCheckConnectionIsNotSuccess(client);						//change 11
 	if (myconnect(client, &opts) != MQTTCLIENT_SUCCESS)
 		goto exit;
-
 
 	//ChangeResponseAndReasonCodeIfMqttVersionGreaterThanFive
 	//rc = ChangeResponseAndReasonCodeIfMqttVersionGreaterThanFive(rc,client);	//change 12
@@ -260,25 +291,34 @@ int  SUBSCRIBEmain(int argc, char** argv)
 		{
 			size_t delimlen = 0;
 
-			if (opts.verbose)
-				printf("%s\t", topicName);
-			if (opts.delimiter)
-				delimlen = strlen(opts.delimiter);
+			//PrintTopicNameIfVerboseIsTrue
+			void PrintTopicNameIfVerboseIsTrue(topicName);									//change 14
+			
+			//SetDelimiterLength
+			delimlen = SetDelimiterLength();												//change 15
+			
+			//printPayloadlenAndPayload		
+			void printPayloadlenAndPayload(message,delimlen);								//change 16
 			if (opts.delimiter == NULL || (message->payloadlen > delimlen &&
 				strncmp(opts.delimiter, &((char*)message->payload)[message->payloadlen - delimlen], delimlen) == 0))
 				printf("%.*s", message->payloadlen, (char*)message->payload);
 			else
 				printf("%.*s%s", message->payloadlen, (char*)message->payload, opts.delimiter);
-			if (message->struct_version == 1 && opts.verbose)
-				logProperties(&message->properties);
+			
+			//PassingMQttpropertiesToLogProperties
+			void PassingMQttpropertiesToLogProperties(message);											//change 17
+			/*if (message->struct_version == 1 && opts.verbose)
+				logProperties(&message->properties);*/
+			
 			fflush(stdout);
 			MQTTClient_freeMessage(&message);
 			MQTTClient_free(topicName);
 		}
-		if (rc != 0)
-			myconnect(&client,&opts);
+		//connectClientToServer
+		void connectClientToServer(rc,client);															//change 18
+		/*if (rc != 0)
+			myconnect(&client,&opts);*/
 	}
-
 exit:
 	MQTTClient_disconnect(client, 0);
 
