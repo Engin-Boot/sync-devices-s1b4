@@ -15,9 +15,6 @@ struct pubsub_opts opts =
 };
 
 
-
-
-
 void cfinish(int sig)
 {
 	signal(SIGINT, NULL);
@@ -246,14 +243,8 @@ int  SUBSCRIBEmain(int argc, char** argv)
 		goto exit;
 
 	//ChangeResponseAndReasonCodeIfMqttVersionGreaterThanFive
-	//rc = ChangeResponseAndReasonCodeIfMqttVersionGreaterThanFive(rc,client);	//change 12
-	if (opts.MQTTVersion >= MQTTVERSION_5)
-	{
-		MQTTResponse response = MQTTClient_subscribe5(client, opts.topic, opts.qos, NULL, NULL);
-		rc = response.reasonCode;
-		MQTTResponse_free(response);
-	}
-	
+	rc = ChangeResponseAndReasonCodeIfMqttVersionGreaterThanFive(rc,client);	//change 12
+		
 	rc = MQTTClient_subscribe(client, opts.topic, opts.qos);
 
 
