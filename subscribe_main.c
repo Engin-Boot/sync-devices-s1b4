@@ -235,8 +235,18 @@ int  SUBSCRIBEmain(int argc, char** argv)
 	void printMQTTClientErrorMessage(int rc);							//change 9
 
 	//interruptAndTerminate
-	void interruptAndTerminate();										//change 10
+	//void interruptAndTerminate();										//change 10
+	#if defined(_WIN32)
+		signal(SIGINT, cfinish);
+		signal(SIGTERM, cfinish);
+	#else
+		memset(&sa, 0, sizeof(struct sigaction));
+		sa.sa_handler = cfinish;
+		sa.sa_flags = 0;
 
+		sigaction(SIGINT, &sa, NULL);
+		sigaction(SIGTERM, &sa, NULL);
+	#endif
 	//ExitIfCheckConnectionIsNotSuccess									
 	//void ExitIfCheckConnectionIsNotSuccess(client);						//change 11
 	if (myconnect(client, &opts) != MQTTCLIENT_SUCCESS)
