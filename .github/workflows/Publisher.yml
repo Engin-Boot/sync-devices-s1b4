@@ -25,5 +25,5 @@ jobs:
       run: msbuild.exe D:\a\sync-devices-s1b4\sync-devices-s1b4\Device1\device.sln
       
     - name: publish
-      run: (echo hello && echo gloves && echo caridac && echo Y)| D:\a\sync-devices-s1b4\sync-devices-s1b4\Device1\x64\Debug\device.exe pub
+      run: (echo hello && echo gloves && echo caridac && echo N)| D:\a\sync-devices-s1b4\sync-devices-s1b4\Device1\x64\Debug\device.exe pub
           
