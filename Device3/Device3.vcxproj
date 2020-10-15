@@ -183,8 +183,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device1\SubscribeFunctions.c" />
-    <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device1\subscribe_main.c" />
+    <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device3\SubscribeFunctions.c" />
+    <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device3\subscribe_main.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device3\ClientConnection.h" />
