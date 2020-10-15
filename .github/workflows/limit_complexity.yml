@@ -12,6 +12,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    
+    - name: install cppcheck static analysis
+      run: sudo apt-get update && sudo apt-get install -y cppcheck 
+    
+    - name: static analysis
+      run: cppcheck --suppress=missingIncludeSystem --check-config --force --enable=all --error-exitcode=1 .
 
     - name: Install lizard
       run: pip install lizard
