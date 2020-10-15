@@ -24,9 +24,3 @@ jobs:
 
     - name: Limit complexity
       run: $HOME/.local/bin/lizard --CCN 6 -x"*/pubsub_opts.c"
-
-    - name: Coverage
-      run: g++ --coverage -S test/Test_Merged.cpp
-    
-    - name: Subscriber Coverage 
-      run: gcov -r Test_Merged.cpp
