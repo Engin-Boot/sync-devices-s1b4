@@ -139,7 +139,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\a\sync-devices-s1b4\sync-devices-s1b4\srcD:\a\sync-devices-s1b4\sync-devices-s1b4\common_obj.dir;C:\Users\ASUS\Music\sync-devices-s1b4-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\a\sync-devices-s1b4\sync-devices-s1b4\src;D:\a\sync-devices-s1b4\sync-devices-s1b4\common_obj.dir;C:\Users\ASUS\Music\sync-devices-s1b4-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
