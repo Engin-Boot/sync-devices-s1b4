@@ -22,13 +22,13 @@ jobs:
           vs-version: 15.0
     
     - name: publish1 build
-      run: msbuild.exe D:\a\sync-devices-s1b4\sync-devices-s1b4\Device1\device.sln
+      run: msbuild D:\a\sync-devices-s1b4\sync-devices-s1b4\Device1\device.vcxproj /p:configuration=debug /p:platform=x64
       
     - name: publish1 run
       run: (echo hello && echo gloves && echo caridac && echo N)| D:\a\sync-devices-s1b4\sync-devices-s1b4\Device1\x64\Debug\device.exe pub
-    
+      
     - name: publish2 build
-      run: msbuild.exe D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\device2.sln
+      run: msbuild D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\device2.vcxproj /p:configuration=debug /p:platform=x64
       
     - name: publish2 run
       run: (echo hello && echo gloves && echo caridac && echo N)| D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\x64\Debug\device2.exe pub
