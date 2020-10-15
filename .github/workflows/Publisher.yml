@@ -22,7 +22,7 @@ jobs:
           vs-version: 15.0
     
     - name: msbuild solution build
-      run: msbuild.exe Device1.sln
+      run: msbuild.exe D:\a\sync-devices-s1b4\sync-devices-s1b4\Device1\device.sln
       
     - name: publish
       run:  D:\a\sync-devices-s1b4\sync-devices-s1b4\Device1\x64\debug\Device1.exe pub
