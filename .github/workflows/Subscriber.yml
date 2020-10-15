@@ -1,4 +1,4 @@
-name: C Builder sub
+name: subscriber
 
 on:
   push:
@@ -21,10 +21,26 @@ jobs:
       with:
           vs-version: 15.0
     
-    - name: msbuild solution build
-      run: msbuild.exe D:\a\sync-devices-s1b4\sync-devices-s1b4\Device1\device.sln
+    - name: subscribe1 build
+      run: msbuild D:\a\sync-devices-s1b4\sync-devices-s1b4\Device1\device.vcxproj /p:configuration=debug /p:platform=x64
     
     - name: subsribe 
       run: |
-        D:\a\sync-devices-s1b4\sync-devices-s1b4\Device1\x64\Debug\device.exe sub
+        D:\a\sync-devices-s1b4\sync-devices-s1b4\Device\x64\Debug\device.exe sub
+      timeout-minutes:  1
+    
+    - name: subscribe2 build
+      run: msbuild D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\device2.vcxproj /p:configuration=debug /p:platform=x64
+    
+    - name: subsribe 
+      run: |
+        D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\x64\Debug\Device2.exe sub
+      timeout-minutes:  1
+    
+    - name: subscribe build
+      run: msbuild D:\a\sync-devices-s1b4\sync-devices-s1b4\Device3\device3.vcxproj /p:configuration=debug /p:platform=x64
+    
+    - name: subsribe 
+      run: |
+        D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\x64\Debug\Device2.exe sub
       timeout-minutes:  1
