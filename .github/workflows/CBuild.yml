@@ -39,12 +39,12 @@ jobs:
     
     
     - name: msbuild solution build
-      run: MSBuild.exe D:\a\sampleSyncDevices\sampleSyncDevices\Device1\Device1.sln
+      run: MSBuild.exe ./Device1.sln
     
     
     - name: publish
       run: |
-        (echo henry && echo x-ray && echo cardiac && echo N)| D:\a\sampleSyncDevices\sampleSyncDevices\x64\Debug\Device1.exe pub   
+        (echo henry && echo x-ray && echo cardiac && echo N)| D:\sync-devices-s1b4\sync-devices-s1b4\x64\Debug\Device1.exe pub   
       
    
       
