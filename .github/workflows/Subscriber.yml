@@ -1,0 +1,30 @@
+name: C Builder sub
+
+on:
+  push:
+    paths-ignore:
+    - '**.md'
+  pull_request:
+    paths-ignore:
+    - '**.md'
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2 
+      with:
+          vs-version: 15.0
+    
+    - name: msbuild solution build
+      run: msbuild Vendor2.vcxproj /p:configuration=debug /p:platform=x64    
+    
+    - name: subsribe 
+      run: |
+        D:\a\sampleSyncDevices\sampleSyncDevices\x64\Debug\Vendor2.exe sub
+      timeout-minutes:  1
