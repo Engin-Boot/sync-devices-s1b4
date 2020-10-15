@@ -105,7 +105,6 @@ int  SUBSCRIBEmain(int argc, char** argv)
 
 			printf("%.*s%s", message->payloadlen, (char*)message->payload, opts.delimiter);
 			const char* str = message->payload;
-			writeIntoCsvFile("patientDetails.csv",str,topicName);
 			PassingMQttpropertiesToLogProperties(message,opts);		
 
 			fflush(stdout);
