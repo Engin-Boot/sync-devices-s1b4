@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Testing\ClientConnection.c" />
     <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Testing\ClientConnectionOptions.c" />
-    
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
