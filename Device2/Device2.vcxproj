@@ -19,13 +19,40 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Device2.c" />
+    <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\ClientConnection.c" />
+    <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\ClientConnectionOptions.c" />
+    <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\Device2.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\PublisherOption.c" />
+    <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\publisher_main.c" />
+    <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\pubsub_opts.c" />
+    <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\SubscribeFunctions.c" />
+    <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\subscribe_main.c" />
+    <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\vendor1_test.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\ClientConnection.h" />
+    <ClInclude Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\ClientConnectionOptions.h" />
+    <ClInclude Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\FileHandling.h" />
+    <ClInclude Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\PublisherOptions.h" />
+    <ClInclude Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\publisher_main.h" />
+    <ClInclude Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\pubsub_opts.h" />
+    <ClInclude Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\subscribe_main.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{723CD352-8B5F-4347-962A-6BFDCC9A4F47}</ProjectGuid>
+    <ProjectGuid>{97F86EEE-0BEA-4417-A467-59266422A466}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Device2</RootNamespace>
+    <RootNamespace>device</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -73,10 +100,10 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -94,13 +121,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\a\sync-devices-s1b4\sync-devices-s1b4\src;D:\a\sync-devices-s1b4\sync-devices-s1b4\common_obj.dir;C:\Users\ASUS\Music\sync-devices-s1b4-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>paho-mqtt3cs.lib;paho-mqtt3cs.exp;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -112,13 +139,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\a\sync-devices-s1b4\sync-devices-s1b4\common_obj.dir;D:\a\sync-devices-s1b4\sync-devices-s1b4\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\a\sync-devices-s1b4\sync-devices-s1b4\src;D:\a\sync-devices-s1b4\sync-devices-s1b4\common_obj.dir;C:\Users\ASUS\Music\sync-devices-s1b4-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>paho-mqtt3cs.exp;paho-mqtt3cs.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>paho-mqtt3cs.lib;paho-mqtt3cs.exp;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -132,15 +159,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\ASUS\Documents\GitHub\paho.mqtt.c-master\build.paho\src\samples\CMakeFiles\paho_cs_pub.dir;C:\Users\ASUS\source\repos\paho_cs\paho_cs;C:\Users\ASUS\Documents\GitHub\paho.mqtt.c-master\build.paho\src\CMakeFiles\paho-mqtt3cs.dir;C:\Users\ASUS\Documents\GitHub\paho.mqtt.c-master\build.paho\src\CMakeFiles\common_obj.dir;C:\Users\ASUS\Documents\GitHub\paho.mqtt.c-master\build.paho;C:\Users\ASUS\Documents\GitHub\paho.mqtt.c-master\src\samples;C:\Users\ASUS\Documents\GitHub\paho.mqtt.c-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ASUS\Documents\GitHub\paho.mqtt.c-master\src\samples;C:\Users\ASUS\Music\sync-devices-s1b4-master\common_obj.dir;C:\Users\ASUS\Music\sync-devices-s1b4-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\ASUS\Documents\GitHub\paho.mqtt.c-master\build.paho\src;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>paho-mqtt3cs.exp;paho-mqtt3cs.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\ASUS\Music\sync-devices-s1b4-master\Device2;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>paho-mqtt3cs.lib;paho-mqtt3cs.exp;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -154,7 +181,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\a\sync-devices-s1b4\sync-devices-s1b4\common_obj.dir;D:\a\sync-devices-s1b4\sync-devices-s1b4\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\src;D:\a\sync-devices-s1b4\sync-devices-s1b4\common_obj.dir;C:\Users\ASUS\Music\sync-devices-s1b4-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -162,43 +189,9 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>paho-mqtt3cs.exp;paho-mqtt3cs.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>paho-mqtt3cs.lib;paho-mqtt3cs.exp;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\pubsub_opts.c" />
-    <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\ClientConnection.c" />
-    <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\ClientConnectionOptions.c" />
-    <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\PublisherOption.c" />
-    <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\publisher_main.c" />
-    <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\vendor1_test.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\Device2.c">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\SubscribeFunctions.c" />
-    <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\subscribe_main.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\ClientConnection.h" />
-    <ClInclude Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\ClientConnectionOptions.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\PublisherOptions.h" />
-    <ClInclude Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\publisher_main.h" />
-    <ClInclude Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\FileHandling.h" />
-    <ClInclude Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\subscribe_main.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
