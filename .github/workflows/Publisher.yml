@@ -26,4 +26,4 @@ jobs:
       
     - name: publish
       run: |
-        (echo henry && echo x-ray && echo cardiac && echo N)| D:\a\sync-devices-s1b4\sync-devices-s1b4\x64\Debug\Device1.exe pub
+        (echo henry && echo x-ray && echo cardiac && echo N)| D:\a\sync-devices-s1b4\sync-devices-s1b4\Device1\x64\debug\Device1.exe
