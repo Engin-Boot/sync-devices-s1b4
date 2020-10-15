@@ -32,3 +32,9 @@ jobs:
       
     - name: publish2 run
       run: (echo hello && echo gloves && echo caridac && echo N)| D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\x64\Debug\device2.exe pub
+   
+    - name: publish3 build
+      run: msbuild D:\a\sync-devices-s1b4\sync-devices-s1b4\Device3\device3.vcxproj /p:configuration=debug /p:platform=x64
+      
+    - name: publish3 run
+      run: (echo hello && echo gloves && echo caridac && echo N)| D:\a\sync-devices-s1b4\sync-devices-s1b4\Device3\x64\Debug\device3.exe pub
