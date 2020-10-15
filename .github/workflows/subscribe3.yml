@@ -27,4 +27,4 @@ jobs:
     - name: subsribe3 run
       run: |
         .\Device3\x64\Debug\Device3.exe sub
-      timeout-minutes:  1
+      timeout-minutes:  3
