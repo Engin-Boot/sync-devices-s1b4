@@ -22,7 +22,9 @@ jobs:
           vs-version: 15.0
     
     - name: msbuild solution build
-      run: msbuild.exe D:\a\sync-devices-s1b4\sync-devices-s1b4\Device1\device.sln
+      run: msbuild.exe Device1.sln
       
     - name: publish
-      run:  (echo hello && echo gloves && echo caridac)| D:\a\sync-devices-s1b4\sync-devices-s1b4\Device1\x64\Debug\device.exe pub
+      run: |
+          (echo hello && echo gloves && echo caridac)| D:\a\sync-devices-s1b4\sync-devices-s1b4\Device1\x64\Debug\device.exe pub
+          (echo hello && echo gloves && echo caridac)| D:\a\sync-devices-s1b4\sync-devices-s1b4\Device2\x64\Debug\Device2.exe pub
