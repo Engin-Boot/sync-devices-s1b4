@@ -9,7 +9,6 @@
 
 volatile int toStop = 0;
 
-
 struct pubsub_opts opts =
 {
 	0, 0, 1, 0, "\n", 100,  	/* debug/app options */
@@ -20,13 +19,12 @@ struct pubsub_opts opts =
 	0, {NULL, NULL}, /* MQTT V5 options */
 };
 
-
-
 void cfinish(int sig)
 {
 	signal(SIGINT, NULL);
 	toStop = 1;
 }
+//change 10 
 void interruptAndTerminate()
 {
 #if defined(_WIN32)
@@ -41,9 +39,6 @@ void interruptAndTerminate()
 	sigaction(SIGTERM, &sa, NULL);
 #endif
 }
-
-
-
 
 int  SUBSCRIBEmain(int argc, char** argv)
 {
@@ -62,31 +57,20 @@ int  SUBSCRIBEmain(int argc, char** argv)
 	if (getopts(argc, argv, &opts) != 0)
 		usage(&opts, (pubsub_opts_nameValue*)infos, program_name);
 
-	opts.verbose = wildCardCheckInTopicName(opts);	
+	opts.verbose = wildCardCheckInTopicName(opts);	//change 4
 
-	url = CheckconnectionToWhichHost(opts);			
-
-
-	printUrlIfVerboseIsTrue( url,opts);	
-
-	
+	url = CheckconnectionToWhichHost(opts);			//change 5
 
 	rc = MQTTClient_createWithOptions(&client, url, opts.clientid, MQTTCLIENT_PERSISTENCE_NONE,
 		NULL, &createOpts);
 	
 
-
-	printMQTTClientErrorMessage(rc,opts); 
-
-	void interruptAndTerminate();			
+	void interruptAndTerminate();			//change 10
 
 	bool check = 0;
 
-	check= CheckConnectionSuccessOrNot(client,opts);		
+	check= CheckConnectionSuccessOrNot(client,opts);		//change 11
 	
-
-	
-	check = PrintAndExitIfRcNotEqualToClientSuccessAndQos(rc,opts);				
 	if (check)
 		goto exit;
 
@@ -101,19 +85,16 @@ int  SUBSCRIBEmain(int argc, char** argv)
 		rc = MQTTClient_receive(client, &topicName, &topicLen, &message, 1000);
 		if (message)
 		{
-
 			printf("%s\t", topicName);
 
 			printf("%.*s%s", message->payloadlen, (char*)message->payload, opts.delimiter);
 			const char* str = message->payload;
 			writeIntoCsvFile("patientDetails.csv",str,topicName);
-			PassingMQttpropertiesToLogProperties(message,opts);		
 
 			fflush(stdout);
 			MQTTClient_freeMessage(&message);
 			MQTTClient_free(topicName);
 		}
-		void connectClientToServer( rc,  client,opts);		
 	}
 exit:
 	MQTTClient_disconnect(client, 0);
