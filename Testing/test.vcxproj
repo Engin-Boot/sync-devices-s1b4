@@ -109,7 +109,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\a\sync-devices-s1b4\sync-devices-s1b4\common_obj.dirD:\a\sync-devices-s1b4\sync-devices-s1b4\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\a\sync-devices-s1b4\sync-devices-s1b4\common_obj.dir;D:\a\sync-devices-s1b4\sync-devices-s1b4\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
