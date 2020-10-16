@@ -184,6 +184,7 @@
     <ClCompile Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Testing\subscribe_main.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Testing\catch.hpp" />
     <ClInclude Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Testing\ClientConnection.h" />
     <ClInclude Include="D:\a\sync-devices-s1b4\sync-devices-s1b4\Testing\ClientConnectionOptions.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
