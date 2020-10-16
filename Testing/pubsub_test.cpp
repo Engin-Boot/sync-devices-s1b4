@@ -8,7 +8,6 @@ extern "C"{
 	#include "PublisherOptions.h"
 	#include"publisher_main.h"
 	#include"subscribe_main.h"
-	#include "subscribeOptions.h"
 	#include"pubsub_opts.h"
 	}
 
