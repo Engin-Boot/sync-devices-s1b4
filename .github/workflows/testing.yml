@@ -26,4 +26,5 @@ jobs:
       
     - name: Test Run
       run: D:\a\sync-devices-s1b4\sync-devices-s1b4\Testing\x64\debug\test.exe
+  
     
