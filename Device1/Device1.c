@@ -1,11 +1,11 @@
 #include "publisher_main.h"
-#include "MQTTClient.h"
+#include "../src/MQTTClient.h"
 #include "subscribe_main.h"
 #include"pubsub_opts.h"
 #include<string.h>
 #include<stdlib.h>
 #include<stdbool.h>
-
+#include<Windows.h>
 
 bool checkIfModeIsPub(char* mode)
 {
@@ -20,12 +20,25 @@ bool checkIfModeIssub(char* mode)
 	return false;
 }
 
+int CheckConsumables(char*procedure,int catheter_count)
+{
+    int i = catheter_count;
+    if (strcmp(procedure,"cardiac\n")==0)
+    {
+        i--;
+        if (i < 2)
+        {
+            print("catheter count is less");
+        }
+    }return i;
+}
 
-void getUserDetails(char ch, char*argvPub[], int argvPubCount)
+void getUserDetails(char ch, char*argvPub[], int argvPubCount,int count)
 {
 	char* patientName = (char*)malloc(sizeof(char) * 30);;
 	char* consumables = (char*)malloc(sizeof(char) * 30);;
 	char*  procedure = (char*)malloc(sizeof(char) * 30);;
+    int catheter_count = count;
 
 	while (ch == 'Y')
 	{
@@ -43,6 +56,7 @@ void getUserDetails(char ch, char*argvPub[], int argvPubCount)
 		fgets(procedure, 30, stdin);
 		argvPub[2] = "Patient/Procedure";
 		argvPub[4] = procedure;
+        catheter_count = CheckConsumables(procedure,catheter_count);
 		PUBLISHmain(argvPubCount, argvPub);
 		printf("Do you wanr to continue? enter (Y-yes/N-No)");
 
@@ -63,11 +77,13 @@ int main(int argc, char* argv[])
 	char* argvPub[7] = { argv[0],"-t","","-m","","-c","tcp://mqtt.eclipse.org:1883" };
 	int argvPubCount = 7;
 
+    char* a=argv[2];
+    int catheter_count = atoi(a);
 
 	char ch = 'Y';
 	if (checkIfModeIsPub(argv[1]))
 	{
-		getUserDetails(ch, argvPub, argvPubCount);
+		getUserDetails(ch, argvPub, argvPubCount,catheter_count);
 	}
 	else if (checkIfModeIssub(argv[1]))
 	{
