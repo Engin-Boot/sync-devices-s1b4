@@ -29,7 +29,7 @@ int CheckConsumables(char*procedure,int catheter_count)
         i--;
         if (i < 2)
         {
-            print("catheter count is less");
+            printf("catheter count is less");
         }
     }return i;
 }
