@@ -56,7 +56,7 @@ void getUserDetails(char ch, char*argvPub[], int argvPubCount,int count)
 		fgets(procedure, 30, stdin);
 		argvPub[2] = "Patient/Procedure";
 		argvPub[4] = procedure;
-        catheter_count = CheckConsumables(procedure,catheter_count);
+        	catheter_count = CheckConsumables(procedure,catheter_count);
 		PUBLISHmain(argvPubCount, argvPub);
 		printf("Do you wanr to continue? enter (Y-yes/N-No)");
 
